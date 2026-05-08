@@ -14,7 +14,8 @@ def create_user(username, email, password):
         )
         conn.commit()
         return True
-    except Exception:
+    except Exception as e:
+        print(f"[DB ERROR] create_user failed: {e}")
         return False
     finally:
         conn.close()
