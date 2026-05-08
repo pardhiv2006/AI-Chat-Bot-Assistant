@@ -16,11 +16,12 @@ from routes.auth_routes import auth_bp
 
 
 def create_app():
-    app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": [
-        "http://localhost:5173",
-        "https://intellidesk-frontend.onrender.com"
-    ]}})
+    # Point static folder to the frontend build directory
+    app = Flask(__name__, 
+                static_folder='../frontend/dist', 
+                static_url_path='/')
+    
+    CORS(app)
 
     # Initialize SQLite database
     init_db()
@@ -31,7 +32,16 @@ def create_app():
 
     @app.route("/api/health")
     def health():
-        return {"status": "ok", "message": "Ollama Chatbot API is running"}
+        return {"status": "ok", "message": "IntelliDesk API is running"}
+
+    # Catch-all route to serve the React app
+    @app.errorhandler(404)
+    def not_found(e):
+        return app.send_static_file('index.html')
+
+    @app.route('/')
+    def index():
+        return app.send_static_file('index.html')
 
     return app
 

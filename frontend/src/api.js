@@ -1,6 +1,4 @@
-const BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? '/api'
-  : 'https://intellidesk-backend.onrender.com/api'; // We will use this name for your Render service
+const BASE = '/api';
 
 export { BASE };
 

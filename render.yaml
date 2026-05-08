@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: intellidesk-ai
+    env: python
+    buildCommand: ./build.sh
+    startCommand: python backend/app.py
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false # You will enter this in the Render Dashboard
+      - key: PORT
+        value: 5001
+      - key: PYTHONPATH
+        value: backend
+      - key: PYTHON_VERSION
+        value: 3.10.0
