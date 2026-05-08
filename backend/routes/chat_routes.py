@@ -1,5 +1,13 @@
+import os
+import sys
+
+# Add parent directory to sys.path to resolve imports from the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
 from flask import Blueprint, request, jsonify
-from models import (
+from models import (  # type: ignore
     create_session,
     save_message,
     get_messages,
@@ -8,14 +16,14 @@ from models import (
     delete_session_messages,
     delete_session,
 )
-from chatbot_core import chat_with_ollama
+from chatbot_core import chat_with_ollama  # type: ignore
 
 chat_bp = Blueprint("chat", __name__)
 
 
 @chat_bp.route("/chat", methods=["POST"])
 def chat():
-    data = request.get_json()
+    data = request.get_json() or {}
     session_id = data.get("session_id", "").strip()
     user_id = data.get("user_id")
     user_input = data.get("message", "").strip()
@@ -67,7 +75,7 @@ def history():
 
 @chat_bp.route("/set-name", methods=["POST"])
 def set_name():
-    data = request.get_json()
+    data = request.get_json() or {}
     session_id = data.get("session_id", "").strip()
     name = data.get("name", "").strip()
 

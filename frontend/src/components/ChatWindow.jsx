@@ -39,12 +39,12 @@ export default function ChatWindow({ messages, isTyping, user }) {
   return (
     <div className="flex-1 overflow-y-auto custom-scrollbar px-12 py-16 relative z-10">
       {/* 🚀 Full-Width Container: Aligns messages to dashboard card borders */}
-      <div className="w-full space-y-16">
+      <div className="w-full space-y-12">
         {messages.map((msg, i) => (
           <div key={i} className={`flex items-start gap-8 w-full ${msg.role === 'user' ? 'flex-row-reverse text-right' : 'flex-row text-left'} animate-fade-up`}>
             
             {/* 👤 Premium Circular Avatars */}
-            <div className={`w-14 h-14 shrink-0 rounded-full flex items-center justify-center text-[13px] font-black border-2 border-white shadow-2xl ring-4 ring-white/10 ${
+            <div className={`w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-[11px] font-black border-2 border-white shadow-2xl ring-4 ring-white/10 ${
               msg.role === 'user' 
                 ? 'bg-gradient-to-tr from-slate-900 to-slate-700 text-white' 
                 : 'bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white'
@@ -52,9 +52,9 @@ export default function ChatWindow({ messages, isTyping, user }) {
               {msg.role === 'user' ? (user?.username?.charAt(0).toUpperCase() || 'U') : nexusLogoIcon}
             </div>
             
-            {/* 💬 Elegant Translucent Chat Bubbles - Expanded Width */}
-            <div className={`flex flex-col max-w-[75%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-              <div className={`px-8 py-7 rounded-[40px] text-[18px] font-medium leading-[1.65] tracking-tight border border-white/60 shadow-2xl transition-all duration-500 ${
+            {/* 💬 Elegant Translucent Chat Bubbles - Refined Width */}
+            <div className={`flex flex-col max-w-[70%] ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+              <div className={`px-7 py-5 rounded-[32px] text-[16px] font-medium leading-[1.6] tracking-tight border border-white/60 shadow-2xl transition-all duration-500 ${
                 msg.role === 'user' 
                   ? 'bg-indigo-600 text-white border-indigo-500 shadow-indigo-200/20' 
                   : 'glass-panel text-slate-800 backdrop-blur-3xl'
@@ -70,10 +70,10 @@ export default function ChatWindow({ messages, isTyping, user }) {
         
         {isTyping && (
           <div className="flex items-start gap-8 animate-fade-in w-full">
-            <div className="w-14 h-14 shrink-0 rounded-full bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white flex items-center justify-center text-[13px] font-black border-2 border-white shadow-2xl ring-4 ring-white/10">
+            <div className="w-11 h-11 shrink-0 rounded-full bg-gradient-to-tr from-indigo-600 to-indigo-400 text-white flex items-center justify-center text-[11px] font-black border-2 border-white shadow-2xl ring-4 ring-white/10">
                {nexusLogoIcon}
             </div>
-            <div className="glass-panel border border-white/60 rounded-[32px] px-10 py-7 shadow-sm flex items-center gap-3">
+            <div className="glass-panel border border-white/60 rounded-[28px] px-8 py-5 shadow-sm flex items-center gap-3">
               <div className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-bounce [animation-duration:0.6s]" />
               <div className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0.1s]" />
               <div className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-bounce [animation-duration:0.6s] [animation-delay:0.2s]" />

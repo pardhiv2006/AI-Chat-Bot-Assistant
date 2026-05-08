@@ -1,6 +1,14 @@
+import os
+import sys
+
+# Add parent directory to sys.path to resolve imports from the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
 from flask import Blueprint, request, jsonify
 import re
-from models import create_user, get_user_by_email
+from models import create_user, get_user_by_email  # type: ignore
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -11,7 +19,7 @@ def is_valid_email(email):
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
-    data = request.get_json()
+    data = request.get_json() or {}
     username = data.get("username", "").strip()
     email = data.get("email", "").strip()
     password = data.get("password", "").strip()
@@ -33,7 +41,7 @@ def register():
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
-    data = request.get_json()
+    data = request.get_json() or {}
     email = data.get("email", "").strip()
     password = data.get("password", "").strip()
 

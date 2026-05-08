@@ -2,7 +2,7 @@
   "name": "chatterbot-root",
   "private": true,
   "scripts": {
-    "dev": "npm run dev --prefix frontend",
+    "dev": "(cd backend && ../venv/bin/python app.py) & npm run dev --prefix frontend",
     "build": "npm run build --prefix frontend",
     "install-all": "npm install --prefix frontend"
   }

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function DashboardHome({ user, onNewChat }) {
   const [text, setText] = useState('');
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [text]);
 
   const handleSend = () => {
     if (text.trim()) {
       onNewChat(text.trim());
       setText('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
     }
   };
 
@@ -62,13 +73,19 @@ export default function DashboardHome({ user, onNewChat }) {
                  <path d="M12 5v14M5 12h14" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
            </div>
-           <input 
-             type="text"
+           <textarea 
+             ref={textareaRef}
+             rows="1"
              value={text}
              onChange={(e) => setText(e.target.value)}
-             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+             onKeyDown={(e) => {
+               if (e.key === 'Enter' && !e.shiftKey) {
+                 e.preventDefault();
+                 handleSend();
+               }
+             }}
              placeholder="Describe your intent..."
-             className="flex-1 bg-transparent border-none outline-none px-6 py-4 text-xl font-medium text-slate-700 placeholder:text-slate-300"
+             className="flex-1 bg-transparent border-none outline-none px-6 py-4 text-xl font-medium text-slate-700 placeholder:text-slate-300 resize-none overflow-hidden max-h-60"
            />
            <div className="flex items-center gap-4 pr-3">
               <button className="w-11 h-11 flex items-center justify-center text-slate-400 hover:text-indigo-500 transition-colors group/mic">

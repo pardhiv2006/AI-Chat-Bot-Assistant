@@ -46,7 +46,7 @@ def chat_with_ollama(history: list, user_input: str) -> str:
     # 4. Call Ollama with the full context
     try:
         response = ollama.chat(
-            model="llama3",
+            model="llama3:latest",
             messages=messages
         )
         bot_reply = response['message']['content']
