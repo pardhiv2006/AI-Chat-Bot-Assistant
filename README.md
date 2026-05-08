@@ -1,112 +1,76 @@
-![ChatterBot: Machine learning in Python](https://i.imgur.com/b3SCmGT.png)
+# 🌌 IntelliDesk AI — The Nexus of Intelligence
 
-# ChatterBot
+![IntelliDesk Banner](https://img.shields.io/badge/IntelliDesk-AI-6366f1?style=for-the-badge&logo=ai&logoColor=white)
+![Powered by Groq](https://img.shields.io/badge/Powered%20By-Groq-orange?style=for-the-badge)
+![Model Llama 3.1](https://img.shields.io/badge/Model-Llama%203.1-blue?style=for-the-badge)
 
-ChatterBot is a machine-learning based conversational dialog engine built in
-Python which makes it possible to generate responses based on collections of
-known conversations. The language independent design of ChatterBot allows it
-to be trained to speak any language.
+**IntelliDesk AI** is a premium, cinematic AI workspace designed for high-performance conversations. Built with a "Dribbble-grade" SaaS aesthetic, it combines the speed of **Groq Cloud API** with a sophisticated React dashboard to deliver an elite AI experience.
 
-[![Package Version](https://img.shields.io/pypi/v/chatterbot.svg)](https://pypi.python.org/pypi/chatterbot/)
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-360/)
-[![Coverage Status](https://img.shields.io/coveralls/gunthercox/ChatterBot.svg)](https://coveralls.io/r/gunthercox/ChatterBot)
-[![Follow on Bluesky](https://img.shields.io/badge/🦋%20Bluesky-1185fe)](https://bsky.app/profile/chatterbot.us)
-[![Join the chat at https://gitter.im/chatterbot/Lobby](https://badges.gitter.im/chatterbot/Lobby.svg)](https://gitter.im/chatterbot/Lobby?utm_source=badge&utm_medium=badge&utm_content=badge)
-<!-- [![Code Climate](https://codeclimate.com/github/gunthercox/ChatterBot/badges/gpa.svg)](https://codeclimate.com/github/gunthercox/ChatterBot) -->
+---
 
-An example of typical input would be something like this:
+## ✨ Key Features
 
-> **user:** Good morning! How are you doing?  
-> **bot:**  I am doing very well, thank you for asking.  
-> **user:** You're welcome.  
-> **bot:** Do you like hats?  
+- 🎭 **Cinematic Interface**: A high-fidelity, glassmorphic UI with smooth animations and dynamic gradients.
+- ⚡ **Instant Intelligence**: Powered by Groq's Llama 3.1 8B model for sub-second response times.
+- 🔐 **Secure Authentication**: Built-in user registration and login system with persistent sessions.
+- 📁 **Smart Workspaces**: Create, manage, and delete multiple chat sessions with full history retrieval.
+- 📱 **Responsive Design**: Seamless experience across desktop and mobile browsers.
 
-## How it works
+---
 
-An untrained instance of ChatterBot starts off with no knowledge of how to communicate. Each time a user enters a statement, the library saves the text that they entered and the text that the statement was in response to. As ChatterBot receives more input the number of responses that it can reply to, and the accuracy of each response in relation to the input statement increases. The program selects the closest matching response by searching for the closest matching known statement that matches the input, it then returns the most likely response to that statement based on how frequently each response is issued by the people the bot communicates with.
+## 🛠️ Tech Stack
 
-# [Documentation](https://docs.chatterbot.us)
+- **Frontend**: React 19 + Vite + Vanilla CSS (Premium Glassmorphism)
+- **Backend**: Flask (Python 3)
+- **Database**: SQLite (Local persistent storage)
+- **AI Engine**: Groq Cloud API (Meta Llama 3.1)
+- **Deployment**: Render (Unified Single-Link Blueprint)
 
-View the [documentation](https://docs.chatterbot.us)
-for ChatterBot.
+---
 
-## Installation
+## 🚀 Quick Start (Local)
 
-This package can be installed from [PyPi](https://pypi.python.org/pypi/ChatterBot) by running:
+### 1. Prerequisites
+- Python 3.9+
+- Node.js 18+
+- A [Groq API Key](https://console.groq.com/keys)
 
+### 2. Setup
 ```bash
-pip install chatterbot
+# Install dependencies
+npm install --prefix frontend
+pip install -r backend/requirements.txt
+
+# Create your environment file
+echo "GROQ_API_KEY=your_key_here" > backend/.env
 ```
 
-## Basic Usage
-
-```python
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-
-chatbot = ChatBot('Ron Obvious')
-
-# Create a new trainer for the chatbot
-trainer = ChatterBotCorpusTrainer(chatbot)
-
-# Train the chatbot based on the english corpus
-trainer.train("chatterbot.corpus.english")
-
-# Get a response to an input statement
-chatbot.get_response("Hello, how are you today?")
+### 3. Run Development Server
+```bash
+npm run dev
 ```
+The app will open at `http://localhost:5173`.
 
-# Training data
+---
 
-ChatterBot comes with a data utility module that can be used to train chat bots.
-At the moment there is training data for over a dozen languages in this module.
-Contributions of additional training data or training data
-in other languages would be greatly appreciated. Take a look at the data files
-in the [chatterbot-corpus](https://github.com/gunthercox/chatterbot-corpus)
-package if you are interested in contributing.
+## ☁️ Deployment (Render)
 
-```python
-from chatterbot.trainers import ChatterBotCorpusTrainer
+This project is optimized for **Render Blueprints**. To deploy your own instance:
 
-# Create a new trainer for the chatbot
-trainer = ChatterBotCorpusTrainer(chatbot)
+1. Push this repository to **GitHub**.
+2. Go to **Render Dashboard** → **Blueprints**.
+3. Connect this repository.
+4. Enter your `GROQ_API_KEY` when prompted.
+5. **Done!** Render will automatically build the frontend and host it via the Flask backend.
 
-# Train based on the english corpus
-trainer.train("chatterbot.corpus.english")
+---
 
-# Train based on english greetings corpus
-trainer.train("chatterbot.corpus.english.greetings")
+## 📄 License
 
-# Train based on the english conversations corpus
-trainer.train("chatterbot.corpus.english.conversations")
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Corpus contributions are welcome! Please make a pull request.**
+---
 
-# Examples
-
-For examples, see the [examples](https://docs.chatterbot.us/examples/)
-section of the documentation.
-
-# History
-
-See release notes for changes https://github.com/gunthercox/ChatterBot/releases
-
-# Contributing
-
-Contributions are welcomed, to help ensure a smooth process please start with the contributing guidelines in our documentation:
-https://docs.chatterbot.us/contributing/
-
-# Sponsors
-
-ChatterBot is sponsored by:
-
-<p>
-   <a href="https://www.testmuai.com/?utm_source=chatterbot&utm_medium=sponsor" target="_blank">
-      <img src="docs/_static/testmu-ai-white-logo.png" style="vertical-align: middle;" width="250" height="80" />
-   </a>
+<p align="center">
+  Built with ❤️ for the future of AI interfaces.
 </p>
-
-# License
-
-ChatterBot is licensed under the [BSD 3-clause license](https://opensource.org/licenses/BSD-3-Clause).

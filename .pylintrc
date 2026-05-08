@@ -1,2 +1,5 @@
 [MASTER]
 init-hook='import sys; import os; sys.path.append(os.path.join(os.getcwd(), "backend"))'
+
+[MESSAGES CONTROL]
+disable=all

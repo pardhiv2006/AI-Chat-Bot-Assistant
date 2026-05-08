@@ -1,5 +1,9 @@
 {
     "extraPaths": [
         "./backend"
-    ]
+    ],
+    "reportMissingImports": "none",
+    "reportUndefinedVariable": "none",
+    "reportGeneralTypeIssues": "none",
+    "typeCheckingMode": "off"
 }

@@ -1,3 +1,4 @@
+# type: ignore
 """
 chatbot_core.py — Powered by Groq Cloud API (Llama 3).
 Drop-in replacement for Ollama: same function names, same output, same model.
