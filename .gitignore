@@ -1,23 +1,39 @@
-bin
-build
-html
-dist
-venv
-.env
-.out
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg/
+.eggs/
 .coverage
 .python-version
-*.pyc
 *.swp
-*.egg-info
-*.egg/*
-*.eggs/*
-*.doctrees
 
-# Database files
-.database
+# Database
+*.db
 *.sqlite3
 *.sqlite3-*
 
+# Environment
+.env
+.env.*
+
+# Build outputs
+dist/
+build/
+html/
+
+# Temp / debug files
+pylint_output.txt
+
 # IDE files
-.vscode
+.vscode/
+.idea/
+
+# Node
+node_modules/
+package-lock.json
+frontend/node_modules/
+frontend/dist/
