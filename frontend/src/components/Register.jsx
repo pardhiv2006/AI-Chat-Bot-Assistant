@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Logo from './Logo';
+import { BASE } from '../api';
 
 export default function Register({ onSwitch, onSuccess }) {
   const [username, setUsername] = useState('');
@@ -20,7 +21,7 @@ export default function Register({ onSwitch, onSuccess }) {
 
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/register', {
+      const res = await fetch(`${BASE}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),

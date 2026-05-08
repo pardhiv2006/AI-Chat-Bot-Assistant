@@ -1,4 +1,8 @@
-const BASE = '/api';
+const BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? '/api'
+  : 'https://intellidesk-backend.onrender.com/api'; // We will use this name for your Render service
+
+export { BASE };
 
 export async function sendMessage(session_id, user_id, message) {
   const res = await fetch(`${BASE}/chat`, {

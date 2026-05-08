@@ -1,11 +1,12 @@
 """
-chatbot_core.py — Wraps the original Ollama chatbot logic with enhanced system instructions.
+chatbot_core.py — Powered by Groq Cloud API (Llama 3).
+Drop-in replacement for Ollama: same function names, same output, same model.
 """
 
-import ollama
+import os
+from groq import Groq  # type: ignore
 
 # 🧠 IntelliDesk Nexus System Prompt
-# Instructions for clean, unambiguous, and professional output.
 SYSTEM_PROMPT = {
     "role": "system",
     "content": (
@@ -17,10 +18,9 @@ SYSTEM_PROMPT = {
     )
 }
 
+
 def build_messages_from_history(history: list) -> list:
-    """
-    Rebuild the messages list from DB history records.
-    """
+    """Rebuild the messages list from DB history records."""
     messages = []
     for record in history:
         messages.append({
@@ -32,26 +32,25 @@ def build_messages_from_history(history: list) -> list:
 
 def chat_with_ollama(history: list, user_input: str) -> str:
     """
-    Core Ollama chat function with integrated system guidance.
+    Core chat function — powered by Groq (Llama 3).
+    Function name kept as-is so no other file needs changing.
     """
-    # 1. Start with the System Prompt for clean/unambiguous output
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        return "Error: GROQ_API_KEY environment variable is not set."
+
+    client = Groq(api_key=api_key)
+
     messages = [SYSTEM_PROMPT]
-
-    # 2. Rebuild conversation context from DB
     messages.extend(build_messages_from_history(history))
-
-    # 3. Append the new user message
     messages.append({"role": "user", "content": user_input})
 
-    # 4. Call Ollama with the full context
     try:
-        response = ollama.chat(
-            model="llama3:latest",
-            messages=messages
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=messages,
         )
-        bot_reply = response['message']['content']
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"Ollama Request Error: {e}")
-        bot_reply = "I apologize, but I am currently experiencing connection difficulties. Please try again in a moment."
-
-    return bot_reply
+        print(f"Groq API Error: {e}")
+        return "I apologize, but I am currently experiencing connection difficulties. Please try again in a moment."

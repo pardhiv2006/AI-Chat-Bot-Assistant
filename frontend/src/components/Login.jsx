@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Logo from './Logo';
+import { BASE } from '../api';
 
 export default function Login({ onLogin, onSwitch }) {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ export default function Login({ onLogin, onSwitch }) {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${BASE}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

@@ -1,5 +1,9 @@
 import sys
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Make sure sibling modules are importable when run from within /backend
 sys.path.insert(0, os.path.dirname(__file__))
@@ -13,7 +17,10 @@ from routes.auth_routes import auth_bp
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": [
+        "http://localhost:5173",
+        "https://intellidesk-frontend.onrender.com"
+    ]}})
 
     # Initialize SQLite database
     init_db()
